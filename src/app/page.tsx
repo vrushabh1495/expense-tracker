@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Home() {
   const [item, setItem] = useState("");
@@ -28,6 +29,11 @@ export default function Home() {
     setPrice("");
   }
 
+  const fetchExpenses = async () => {
+    const response = await fetch("/api/expense");
+    console.log(await response.json());
+  }
+
   return(
     <main className="p-6 max-w-xl mx-auto">
       <h1 className="text-2xl font-bold mb-4"> Expense Tracker </h1>
@@ -53,6 +59,15 @@ export default function Home() {
         >
           Add Expense  
         </button>
+        {/* <button
+          onClick={fetchExpenses}
+          className="bg-blue-600 text-white px-4 rounded"
+        >
+          Fetch Expenses
+        </button> */}
+        <Link href="/summary" className="bg-blue-600 text-white px-4 rounded"> View Expenses</Link>
+        <div>
+      </div>
       </div>
       {responseText ? <p className="flex gap-2 mb-4">{responseText}</p> : <></>}
     </main>

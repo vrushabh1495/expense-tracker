@@ -2,3 +2,8 @@ name = "expense-tracker"
 compatibility_date = "2024-11-01"
 pages_build_output_dir = ".vercel/output/static"
 compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "expense_tracker_db"
+database_name = "expense-tracker-db"
+database_id = "caa8a061-2b42-47ba-a4e3-771462baf83d"

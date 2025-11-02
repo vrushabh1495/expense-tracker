@@ -1,0 +1,4 @@
+DROP TABLE IF EXISTS expenses;
+CREATE TABLE IF NOT EXISTS expenses (id INTEGER PRIMARY KEY AUTOINCREMENT, Item Varchar(100) NOT NULL, Price DECIMAL(10,2) NOT NULL, Date DATE NOT NULL);
+INSERT INTO expenses (id, Item, Price, Date) VALUES 
+(1,'Vegetables & Fruits', 298 , '2025-11-01');
