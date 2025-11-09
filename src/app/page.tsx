@@ -7,14 +7,26 @@ export default function Home() {
   const [item, setItem] = useState("");
   const [price, setPrice] = useState("");
   const [responseText, setResponseText] = useState("");
+  const [username, setUsername] = useState<string | null>(null);
 
   const addExpense = async () =>{
     if(!item || !price) return alert("Enter both fields")
     
+    const userResponse = await fetch("/api/users/me", {
+      credentials: "include",
+    });
+
+    if (!userResponse.ok) {
+      throw new Error("Failed to get user info");
+    }
+
+    const userData = (await userResponse.json()) as { user: string };
+    setUsername(userData.user);
+
     const response = await fetch("/api/expense", {
       method: "POST",
       headers: {"Content-Type":"application/json"},
-      body: JSON.stringify({item, price: Number(price)}),
+      body: JSON.stringify({item, price: Number(price), username: userData.user}),
     });
     
     if(response.status===200){

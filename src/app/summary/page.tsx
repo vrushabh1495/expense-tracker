@@ -22,21 +22,41 @@ type Expense = {
 export default function SummaryPage() {
   const [data, setData] = useState<Expense[] | null>(null);
   const [loading, setLoading] = useState(true);
+  const [username, setUsername] = useState<string | null>(null);
+
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch("/api/expense");
-        const json = (await response.json()) as ExpenseResponse;
+        // First, get the current user's username
+        const userResponse = await fetch("/api/users/me", {
+          credentials: "include",
+        });
+
+        if (!userResponse.ok) {
+          throw new Error("Failed to get user info");
+        }
+
+        const userData = (await userResponse.json()) as { user: string };
+        setUsername(userData.user);
+
+        // Then fetch expenses for this user
+        const expenseResponse = await fetch(
+          `/api/expense?username=${userData.user}`,
+          {
+            credentials: "include",
+          }
+        );
+
+        const json = (await expenseResponse.json()) as ExpenseResponse;
         setData(json.expenses);
-        console.log(data);
       } catch (error) {
-        console.error(error);
+        console.error("Error fetching data:", error);
       } finally {
         setLoading(false);
       }
     }
     fetchData();
-  });
+  }, []); // Added dependency array to run only once
 
   if (loading) return <div>Loading...</div>;
 
@@ -78,7 +98,10 @@ export default function SummaryPage() {
       ) : (
         <div>No expenses found</div>
       )}
-    <Link href="/" className="bg-blue-600 text-white px-4 rounded"> Back to Home </Link>
+      <Link href="/" className="bg-blue-600 text-white px-4 rounded">
+        {" "}
+        Back to Home{" "}
+      </Link>
     </div>
   );
 }
