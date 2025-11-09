@@ -3,11 +3,7 @@ import { comparePassword, generateToken } from "@/lib/auth";
 import { getRequestContext } from "@cloudflare/next-on-pages";
 import { Env } from "@/types/env";
 
-
 export const runtime = "edge";
-// export interface Env {
-//     EXPENSE_TRACKER_AUTH_KV: KVNamespace;
-// }
 
 export async function POST(req: NextRequest){
     const { env } = getRequestContext();
