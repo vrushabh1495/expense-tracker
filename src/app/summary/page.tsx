@@ -36,7 +36,7 @@ export default function SummaryPage() {
       }
     }
     fetchData();
-  }, []);
+  });
 
   if (loading) return <div>Loading...</div>;
 

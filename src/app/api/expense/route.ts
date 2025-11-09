@@ -1,8 +1,9 @@
 import { D1Database } from '@cloudflare/workers-types';
 import { getRequestContext } from '@cloudflare/next-on-pages';
-export interface Env {
-    expense_tracker_db: D1Database;
-}
+import { Env } from '@/types/env';
+// export interface Env {
+//     expense_tracker_db: D1Database;
+// }
 
 import { NextRequest, NextResponse } from "next/server";
 

@@ -8,7 +8,6 @@ export default function Home() {
   const [price, setPrice] = useState("");
   const [responseText, setResponseText] = useState("");
 
-
   const addExpense = async () =>{
     if(!item || !price) return alert("Enter both fields")
     
@@ -33,11 +32,12 @@ export default function Home() {
     const response = await fetch("/api/expense");
     console.log(await response.json());
   }
+  console.log(fetchExpenses);
 
   return(
     <main className="p-6 max-w-xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4"> Expense Tracker </h1>
-      <div className="flex gap-2 mb-4">
+      <h1 className="text-2xl font-bold mb-4 flex justify-center"> Expense Tracker </h1>
+      <div className="flex flex-col gap-2 mb-4">
         <input
           type="text"
           placeholder="Item"
@@ -55,17 +55,11 @@ export default function Home() {
         />
         <button
           onClick={addExpense}
-          className="bg-blue-600 text-white px-4 rounded"
+          className="bg-blue-600 text-white px-4 my-0.5 h-8 rounded"
         >
           Add Expense  
         </button>
-        {/* <button
-          onClick={fetchExpenses}
-          className="bg-blue-600 text-white px-4 rounded"
-        >
-          Fetch Expenses
-        </button> */}
-        <Link href="/summary" className="bg-blue-600 text-white px-4 rounded"> View Expenses</Link>
+        <Link href="/summary" className="bg-blue-600 text-white px-4 h-8 rounded flex justify-center">View Expenses</Link>
         <div>
       </div>
       </div>
