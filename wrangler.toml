@@ -7,7 +7,9 @@ compatibility_flags = ["nodejs_compat"]
 binding = "expense_tracker_db"
 database_name = "expense-tracker-db"
 database_id = "caa8a061-2b42-47ba-a4e3-771462baf83d"
+remote = true
 
 [[kv_namespaces]]
 binding = "EXPENSE_TRACKER_AUTH_KV"
 id = "b51fae7b7cfe4dec8ecc14f1311f31d1"
+remote = true

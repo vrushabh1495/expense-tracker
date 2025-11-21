@@ -22,15 +22,15 @@ export async function POST(request: NextRequest){
 
     const hashedPassword = await hashPassword(data.password);
     const user = {
-        username: data.username,
+        username: data.username.trim(),
         email: data.email,
         password: hashedPassword
     }
-    console.log(user);
-    await ( env as Env).EXPENSE_TRACKER_AUTH_KV.put(data.username, hashedPassword);
+    console.log("The user being registered is: ",user);
+    await ( env as Env).EXPENSE_TRACKER_AUTH_KV.put(data.username.trim(), hashedPassword);
     
 
-    return NextResponse.json({message:`${data.username} created successfully`}, {status:201})
+    return NextResponse.json({message:`${data.username.trim()} created successfully`}, {status:201})
 }
 
 
